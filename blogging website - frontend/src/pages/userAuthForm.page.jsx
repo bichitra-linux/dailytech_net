@@ -53,11 +53,11 @@ const UserAuthForm = ({ type }) => {
 
                 {
                     type === "sign-in" ?
-                        <p className="text-center mt-4">
-                            Don't have an account? <Link to="/signup" className="text-blue">Sign Up</Link>
+                        <p className="text-center text-black text-xl mt-4">
+                            Don't have an account? <Link to="/signup" className="underline text-blue ml-1">Sign Up</Link>
                         </p> :
-                        <p className="text-center mt-4">
-                            Already have an account? <Link to="/signin" className="text-blue">Sign In</Link>
+                        <p className="text-center text-black text-xl mt-4">
+                            Already have an account? <Link to="/signin" className="underline text-blue ml-1">Sign In</Link>
                         </p>
                 }
 
