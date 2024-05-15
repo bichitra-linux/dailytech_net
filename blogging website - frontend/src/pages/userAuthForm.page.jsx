@@ -38,7 +38,7 @@ const UserAuthForm = ({ type }) => {
                     {type === "sign-in" ? "Sign In" : "Sign Up"}
                 </button>
 
-                <div className="relative w-full items-center gap-2 my-10 opacity-10 uppercase text-black font-bold">
+                <div className="relative flex w-full items-center gap-2 my-10 opacity-10 uppercase text-black font-bold">
                     <hr className="w-1/2 border-black" />
                     <p>or</p>
                     <hr className="w-1/2 border-black" />
