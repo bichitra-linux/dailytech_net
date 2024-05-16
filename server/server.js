@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import 'dotenv/config';
+import { nanoid } from "nanoid";
 
 //schema imports
 import User from "./Schema/User.js";
@@ -19,6 +20,20 @@ let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%
 mongoose.connect(process.env.DB_LOCATION, {
     autoIndex: true
 })
+
+const generateUsername = async (email) => {
+    let username = email.split(
+        "@"
+    )[0];
+    let isUsernameNotUnique = await User.exists({ "personal_info.username": username }).then((result) => {
+        return result;
+    });
+
+    isUsernameNotUnique ? username += nanoid() : "";
+
+    return username;
+
+}
 
 // Check if the connection is successful 
 server.post("/signup", (req, res) => {
@@ -44,34 +59,35 @@ server.post("/signup", (req, res) => {
     bcrypt.hash(
         password,
         10,
-        (err, hash) => {
+        async(err, hash) => {
 
-            let username = email.split(
-                "@"
-            )[0];
+        let username = await generateUsername(email);
 
-            let user = new User({
-                personal_info: {
-                    fullname: fullname,
-                    email: email,
-                    password: hash,
-                    username: username
-                }
-            })
+        let user = new User({
+            personal_info: {
+                fullname: fullname,
+                email: email,
+                password: hash,
+                username: username
+            }
+        })
 
             user.save().then((u) => {
-                return res.status(200).json({
-                    "status": "ok",
-                    "user": u
-                })
-            });
+            return res.status(200).json({
+                "status": "ok",
+                "user": u
+            })
+        });
 
 
-            if (err) {
-                return res.status(500).json({ error: "Internal server error" })
+        if(err) {
+            if (err == 11000) {
+                return res.status(500).json({ error: "Email already exists" })
             }
-            
+            return res.status(500).json({ error: "Internal server error" })
         }
+
+    }
     )
 
     //return res.status(200).json({ "status": "ok" })

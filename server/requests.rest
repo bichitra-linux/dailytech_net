@@ -11,7 +11,7 @@ POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    "email": "test@thedailytech.net",
+    "email": "test1@thedailytech.net",
     "password": "test1234!A",
     "fullname": "Test Daily Tech"
 }
