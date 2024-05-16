@@ -5,11 +5,18 @@ import 'dotenv/config' ;
 const server = express();
 server.use(express.json());
 
+let PORT = "3000";
+
+let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+
 // Connect to MongoDB
 mongoose.connect(process.env.DB_LOCATION, {
     autoIndex: true
 })
 
+// Define a schema
 server.post("/signup", (req, res) => {
     
     const { email, password, fullname } = req.body;
@@ -33,7 +40,7 @@ server.post("/signin", (req, res) => {
     res.json(req.body)
 })
 
-let PORT = "3000";
+
 
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
