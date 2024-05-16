@@ -11,8 +11,17 @@ mongoose.connect(process.env.DB_LOCATION, {
 })
 
 server.post("/signup", (req, res) => {
-    res.json(req.body)
-    console.log(req.body)
+    
+    const { email, password, fullname } = req.body;
+
+    if (fullname.length < 3 ){
+        return res.status(403).json({error: "Fullname must be at least 3 characters long"})  
+    }
+    return res.status(200).json({"status": "ok"})
+
+
+
+
 })
 
 server.post("/signin", (req, res) => {
