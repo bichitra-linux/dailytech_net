@@ -45,7 +45,7 @@ server.post("/signup", (req, res) => {
             if (err) {
                 return res.status(500).json({error: "Internal server error"})
             }
-            console
+            console.log(hash)
         }
     )
 
