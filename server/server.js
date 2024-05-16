@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 import 'dotenv/config' ;
 
 const server = express();
@@ -36,6 +37,18 @@ server.post("/signup", (req, res) => {
     if (!passwordRegex.test(password)){
         return res.status(403).json({error: "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character"})
     }
+
+    bcrypt.hash(
+        password,
+        10,
+        (err, hash) => {
+            if (err) {
+                return res.status(500).json({error: "Internal server error"})
+            }
+            console
+        }
+    )
+
     return res.status(200).json({"status": "ok"})
 
     

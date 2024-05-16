@@ -12,6 +12,6 @@ Content-Type: application/json
 
 {
     "email": "test@thedailytech.net",
-    "password": "test123",
+    "password": "test1234!A",
     "fullname": "Test Daily Tech"
 }
