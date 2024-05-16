@@ -1,12 +1,13 @@
-POST http://localhost/signin 
-Content-Type: application/json
 
-{
-    "email": "test@thedailytech.net",
-    "password": "test1234"
-}
+#POST http://localhost:3000/signin 
+#Content-Type: application/json
 
-POST http://localhost/signup
+#{
+#    "email": "test@thedailytech.net",
+#    "password": "test1234"
+#}
+
+POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
