@@ -29,7 +29,7 @@ const generateUsername = async (email) => {
         return result;
     });
 
-    isUsernameNotUnique ? username += nanoid() : "";
+    isUsernameNotUnique ? username += nanoid().substring(0, 4) : "";
 
     return username;
 
