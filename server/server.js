@@ -17,10 +17,15 @@ server.post("/signup", (req, res) => {
     if (fullname.length < 3 ){
         return res.status(403).json({error: "Fullname must be at least 3 characters long"})  
     }
+    if (!email.length){
+        return res.status(403).json({error: "Email is required"})
+    }
+    if (password.length < 8){
+        return res.status(403).json({error: "Password must be at least 8 characters long"})
+    }
     return res.status(200).json({"status": "ok"})
 
-
-
+    
 
 })
 
