@@ -1,8 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion"
 
-const AnimationWrapper = ({ children }) => {
+const AnimationWrapper = ({ children, initial }) => {
     return (
-        <motion.div>
+        <motion.div
+            initial={initial}
+        >
             { children }
         </motion.div>
     )
