@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import 'dotenv/config' ;
 
 const server = express();
+server.use(express.json());
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_LOCATION, {
@@ -10,6 +11,11 @@ mongoose.connect(process.env.DB_LOCATION, {
 })
 
 server.post("/signup", (req, res) => {
+    res.json(req.body)
+    console.log(req.body)
+})
+
+server.post("/signin", (req, res) => {
     res.json(req.body)
 })
 
