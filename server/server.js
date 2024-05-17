@@ -11,9 +11,10 @@ import User from "./Schema/User.js";
 
 const server = express();
 server.use(express.json());
+let PORT = "3000";
 server.use(cors());
 
-let PORT = "3000";
+
 
 let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;    // regex for e-mail
 let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;   // regex for password
