@@ -148,6 +148,6 @@ server.post("/signin", (req, res) => {
     //return res.status(200).json({ "status": "ok" })
 })
 
-server.listen(PORT, '172.29.80.1', () => {
+server.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is running on port ${PORT}`);
 })
