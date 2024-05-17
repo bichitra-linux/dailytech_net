@@ -15,8 +15,8 @@ const UserAuthForm = ({ type }) => {
         axios.post(import.meta.env.VITE_SERVER_DOMAIN + serverRoute, formEntry).then(({data}) => {
             console.log(data)
             
-        }).catch(({ response }) => {
-            toast.error(response.data.error)
+        }).catch(({Response}) => {
+            toast.error( Response.data.error)
         })
        
     }
