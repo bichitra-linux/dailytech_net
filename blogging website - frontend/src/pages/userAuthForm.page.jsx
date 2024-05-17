@@ -5,6 +5,7 @@ import AnimationWrapper from "../common/page-animation";
 import { useRef } from "react";
 import { toast, Toaster } from "react-hot-toast"
 import axios from "axios";
+import { storeInSession } from "../common/session";
 
 const UserAuthForm = ({ type }) => {
 
@@ -12,20 +13,20 @@ const UserAuthForm = ({ type }) => {
 
     //function to handle user authentication through server
     const userAuthThroughServer = (serverRoute, formData) => {
-        axios.post(import.meta.env.VITE_SERVER_DOMAIN + serverRoute, formData).then(({data}) => {
-            console.log(data)
-            
-        }).catch(({Response}) => {
-            toast.error( Response.data.error)
+        axios.post(import.meta.env.VITE_SERVER_DOMAIN + serverRoute, formData).then(({ data }) => {
+            storeInSession("user", JSON.stringify(data))
+
+        }).catch(({ Response }) => {
+            toast.error(Response.data.error)
         })
-       
+
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const serverRoute = type == "sign-in" ? "/signin" : "/signup";
-        const form = new FormData(/*authForm.current*/ formElement);
+        const form = new FormData(formElement);
         let formData = {};
 
         let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;    // regex for e-mail
@@ -41,17 +42,17 @@ const UserAuthForm = ({ type }) => {
         const { fullname, email, password } = formData;
         if (fullname) {
             if (fullname.length < 3) {
-                return toast.error("Full Name must be at least 3 characters long" )
-            }   
+                return toast.error("Full Name must be at least 3 characters long")
+            }
         }
         if (!email.length) {
-            return toast.error("Email is required" )
+            return toast.error("Email is required")
         }
         if (!emailRegex.test(email)) {
-            return toast.error("Invalid email" )
+            return toast.error("Invalid email")
         }
         if (password.length < 8) {
-            return toast.error("Password must be at least 8 characters long" )
+            return toast.error("Password must be at least 8 characters long")
         }
         if (!passwordRegex.test(password)) {
             return toast.error("Password must contain at least one uppercase letter, one lowercase letter, one number and one special character")
