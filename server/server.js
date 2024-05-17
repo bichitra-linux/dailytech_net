@@ -4,12 +4,14 @@ import bcrypt from "bcrypt";
 import 'dotenv/config';
 import { nanoid } from "nanoid";
 import jwt from "jsonwebtoken";
+import cors from "cors";
 
 //schema imports
 import User from "./Schema/User.js";
 
 const server = express();
 server.use(express.json());
+server.use(cors());
 
 let PORT = "3000";
 
