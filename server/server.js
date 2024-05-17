@@ -21,6 +21,15 @@ mongoose.connect(process.env.DB_LOCATION, {
     autoIndex: true
 })
 
+const formatDatatoSend = ( user ) => {
+    return{
+        profile_img: user.personal_info.profile_img,
+        username: user.personal_info.username,
+        fullname: user.personal_info.fullname,
+
+    }
+}
+
 const generateUsername = async (email) => {
     let username = email.split(
         "@"
@@ -73,10 +82,7 @@ server.post("/signup", (req, res) => {
         })
 
             user.save().then((u) => {
-            return res.status(200).json({
-                "status": "ok",
-                "user": u
-            })
+            return res.status(200).json(formatDatatoSend(u))
         });
 
 
