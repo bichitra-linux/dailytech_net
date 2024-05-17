@@ -8,11 +8,11 @@ import axios from "axios";
 
 const UserAuthForm = ({ type }) => {
 
-    const authForm = useRef();
+    //const authForm = useRef();
 
     //function to handle user authentication through server
-    const userAuthThroughServer = (serverRoute, formEntry) => {
-        axios.post(import.meta.env.VITE_SERVER_DOMAIN + serverRoute, formEntry).then(({data}) => {
+    const userAuthThroughServer = (serverRoute, formData) => {
+        axios.post(import.meta.env.VITE_SERVER_DOMAIN + serverRoute, formData).then(({data}) => {
             console.log(data)
             
         }).catch(({Response}) => {
@@ -25,20 +25,20 @@ const UserAuthForm = ({ type }) => {
         e.preventDefault();
 
         const serverRoute = type == "sign-in" ? "/signin" : "/signup";
-        const form = new FormData(authForm.current);
-        let formEntry = {};
+        const form = new FormData(/*authForm.current*/ formElement);
+        let formData = {};
 
         let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;    // regex for e-mail
         let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;   // regex for password
 
 
         for (let [key, value] of form.entries()) {
-            formEntry[key] = value;
+            formData[key] = value;
         }
 
         //form validation 
 
-        const { fullname, email, password } = formEntry;
+        const { fullname, email, password } = formData;
         if (fullname) {
             if (fullname.length < 3) {
                 return toast.error("Full Name must be at least 3 characters long" )
@@ -59,14 +59,14 @@ const UserAuthForm = ({ type }) => {
 
         //send data to the server
 
-        userAuthThroughServer(serverRoute, formEntry)
+        userAuthThroughServer(serverRoute, formData)
     }
 
     return (
         <AnimationWrapper keyValue={type}>
             <section className="h-cover flex items-center justify-center">
                 <Toaster />
-                <form ref={authForm} className="w-[80%] max-w-[400px]">
+                <form id="formElement" className="w-[80%] max-w-[400px]">
                     <h1 className="text-4xl capitalize text-center mb-24">
                         {type === "sign-in" ? "Welcome Back" : "Join Us Today"}
                     </h1>
