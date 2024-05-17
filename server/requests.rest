@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
     "email": "test@thedailytech.net",
-    "password": "test1234!"
+    "password": "test1234T"
 }
 
 #POST http://localhost:3000/signup
