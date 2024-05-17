@@ -112,7 +112,7 @@ server.post("/signin", (req, res) => {
 
     User.findOne({ "personal_info.email": email }).then((user) => {
         if (!user) {
-            return res.status(403).json({ error: "User not found" })
+            return res.status(403).json({ error: "User not found for this email" })
         }
         bcrypt.compare(password, user.personal_info.password, (err, result) => {
             if (err) {
