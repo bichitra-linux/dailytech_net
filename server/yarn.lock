@@ -734,9 +734,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1622.0":
-  version: 2.1622.0
-  resolution: "aws-sdk@npm:2.1622.0"
+"aws-sdk@npm:^2.1623.0":
+  version: 2.1623.0
+  resolution: "aws-sdk@npm:2.1623.0"
   dependencies:
     buffer: "npm:4.9.2"
     events: "npm:1.1.1"
@@ -748,7 +748,7 @@ __metadata:
     util: "npm:^0.12.4"
     uuid: "npm:8.0.0"
     xml2js: "npm:0.6.2"
-  checksum: 10c0/39e25ea8dac34341b17fc8e80e605d72537f243d3261b1164573af44967abdcbc3f3a3d254be853996cb0c4fc10d2b298d17bff5b805220f9f9d822b3919081e
+  checksum: 10c0/620cd6e664336e11e8e44d12caef5cd90b0fc408b1196b57d40c31ee2eb493d3afe3a82160e904fe6ed44b3b5172f13da74d4c09efb74ae4e4f3fe3dc74019a6
   languageName: node
   linkType: hard
 
@@ -3377,7 +3377,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "server@workspace:."
   dependencies:
-    aws-sdk: "npm:^2.1622.0"
+    aws-sdk: "npm:^2.1623.0"
     bcrypt: "npm:^5.1.1"
     cors: "npm:^2.8.5"
     dotenv: "npm:^16.4.5"
