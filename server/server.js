@@ -90,16 +90,13 @@ server.post("/signup", (req, res) => {
             })
 
             user.save().then((u) => {
-                return res.status(200).json(formatDatatoSend(u))
-            });
-
-
-            if (err) {
-                if (err == 11000) {
-                    return res.status(500).json({ error: "Email already exists" })
+                return res.status(200).json(formatDatatoSend(u));
+            }).catch((err) => {
+                if (err.code === 11000) {
+                    return res.status(500).json({ error: "Email already exists" });
                 }
-                return res.status(500).json({ error: "Internal server error" })
-            }
+                return res.status(500).json({ error: "Internal server error" });
+            });
 
         }
     )
