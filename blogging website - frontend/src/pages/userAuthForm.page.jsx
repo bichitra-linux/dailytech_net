@@ -14,6 +14,7 @@ const UserAuthForm = ({ type }) => {
 
     let { userAuth: { access_token }, setUserAuth } = useContext(UserContext)
 
+
     console.log(access_token);
 
     //function to handle user authentication through server
@@ -23,17 +24,12 @@ const UserAuthForm = ({ type }) => {
                 storeInSession("user", JSON.stringify(data))
                 setUserAuth(data);
             })
-            .catch((error) => {
-                if (error.response) {
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    toast.error(error.response.data.error);
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    toast.error("No response from server. Please try again later.");
+            .catch((response) => {
+                console.log(response);
+                if (response && response.data) {
+                    toast.error(response.data.error)
                 } else {
-                    // Something happened in setting up the request that triggered an Error
-                    toast.error("An error occurred. Please try again later.");
+                    toast.error('An error occurred');
                 }
             });
     }
