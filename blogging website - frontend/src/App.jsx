@@ -8,17 +8,17 @@ export const UserContext = createContext({})
 
 const App = () => {
 
-    const [userAuth, setuserAuth] = useState({});
+    const [userAuth, setUserAuth] = useState({});
 
     useEffect(() => {
         let userInSession = lookInSession("user");
 
-        userInSession ? setuserAuth(JSON.parse(userInSession)) : setuserAuth({ access_token: null});
+        userInSession ? setUserAuth(JSON.parse(userInSession)) : setUserAuth({ access_token: null});
 
     }, [])
 
     return (
-        <UserContext.Provider value={{userAuth, setuserAuth}}>
+        <UserContext.Provider value={{userAuth, setUserAuth}}>
             <Routes>
                 <Route path="/" element={<Navbar />}>
                     <Route path="/signin" element={<UserAuthForm type="sign-in" />} />
